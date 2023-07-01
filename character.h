@@ -1,6 +1,5 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
-#include "crossbow.h"
 
 struct Character
 {
@@ -31,10 +30,8 @@ public:
 
 class Archer : public Character
 {
-    CbState* cbstate;
-    bool ready_to_shoot;
+    bool ready_to_shoot = true;
 public:
-    Archer();
     void Attack();
     void Reload();
 };

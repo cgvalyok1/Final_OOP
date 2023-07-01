@@ -128,14 +128,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="character.cpp" />
-    <ClCompile Include="crossbow.cpp" />
     <ClCompile Include="enemy.cpp" />
     <ClCompile Include="FInal_OOP.cpp" />
     <ClCompile Include="player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />
-    <ClInclude Include="crossbow.h" />
     <ClInclude Include="enemy.h" />
     <ClInclude Include="player.h" />
   </ItemGroup>

@@ -1,6 +1,5 @@
 #include <iostream>
 #include "character.h"
-#include "crossbow.h"
 
 using namespace std;
 
@@ -31,29 +30,22 @@ void Dogge::Reload()
 {
 }
 
-Archer::Archer()
-{
-    cbstate = ArmedCrossbow::GetInstance();
-    ready_to_shoot = true;
-}
-
 void Archer::Attack()
 {
     if (ready_to_shoot)
     {
         cout << "The enemy lost 10 hp from an arrow" << endl;
         ready_to_shoot = false;
-        cbstate = UnarmedCrossbow::GetInstance();
     }
-    else
-    {
-        cout << "Crossbow is not armed" << endl;
-    }
+    else { cout << "Crossbow is not armed" << endl; }
 }
 
 void Archer::Reload()
 {
-    cbstate->Reload();
-    ready_to_shoot = true;
-    cbstate = ArmedCrossbow::GetInstance();
+    if (ready_to_shoot == true) { cout << "Crossbow is already armed" << endl; }
+    else
+    {
+        ready_to_shoot = true;
+        cout << "Crossbow has been reloaded" << endl;
+    }
 }

@@ -8,31 +8,31 @@ public:
 };
 
 class Goblin : public Enemy {
+private:
+    int hp;
+    int atck;
+    int resistance;
+    const char* name;
 public:
+    Goblin(int s);
     void Saysmth() const override;
 };
 class Dragon : public Enemy {
+private:
+    int hp = 1000;
+    int atck = 500;
+    int resistance = 250;
 public:
     void Saysmth() const override;
 };
 
-class EnemyCreator {
+
+class EnemyFactory {
 public:
-    virtual ~EnemyCreator() {};
-    virtual Enemy* FactoryMethod() const = 0;
+    EnemyFactory() {}
+    Enemy* GoblinCreator(int s);
+    Enemy* DragonCreator();
 
-    void CREATION() const;
-};
-
-class GoblinCreator : public EnemyCreator {
-
-public:
-    Enemy* FactoryMethod() const override;
-};
-
-class DragonCreator : public EnemyCreator {
-public:
-    Enemy* FactoryMethod() const override;
 };
 
 #endif

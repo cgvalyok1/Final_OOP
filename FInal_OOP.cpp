@@ -1,25 +1,16 @@
 ﻿#include <iostream>
 #include "character.h"
-#include "crossbow.h"
 #include "player.h"
 #include "enemy.h"
 
 using namespace std;
 
 /*  
-*   Strategy паттерн используется в классе Player
-*   State в классе crossbow для определения готовности
-*   Factory используется с классом enemy для создания и удаления (в данной реализации)
-*   В будущем можно будет не удалять, а наоборот возвращать его и работать в функции битвы,
-*   например, или еще как угодно.
+*   Strategy паттерн используется в классе Character
+*   Memento (снимок) паттерн используется с классом player (в том же файле) для
+*   запоминания прошлых ников.
+*   Factory используется с классом enemyfactory для создания
 */
-
-void Encounter(const EnemyCreator& creator)
-{ //можно в будущем переделать в битву, возвращая в CREATION врага, и работать с ним тут
-    creator.CREATION();
-    cout << "Oops! Mysterious meteor struck its head and it died)" << endl;
-    cout << endl;
-}
 
 using namespace std;
 
@@ -49,15 +40,29 @@ int main()
     player->Attack();
 
     cout << endl;
-    EnemyCreator* goblincreator = new GoblinCreator();
-    EnemyCreator* dragoncreator = new DragonCreator();
+    
+    Caretaker* caretaker = new Caretaker(player);
+    cout << "Player: my nickname is " << player->get_nickname() << endl;
+    caretaker->addMemento();
+    player->set_nickname("CGValyok");
+    cout << "Player: my nickname is " << player->get_nickname() << endl;
+    caretaker->ShowHistory();
+    caretaker->undo_to_Memento();
+    cout << "Player: my nickname is " << player->get_nickname() << endl;
 
-    Encounter(*goblincreator);
+    cout << endl;  
+    EnemyFactory* factory = new EnemyFactory();
+    Enemy* enemy = factory->GoblinCreator(2);
+    enemy->Saysmth();
+    enemy = factory->GoblinCreator(1);
+    enemy->Saysmth();
+    enemy = factory->DragonCreator();
+    enemy->Saysmth();
+    
 
-    Encounter(*dragoncreator);
-
-    delete goblincreator;
-    delete dragoncreator;
+    delete enemy;
+    delete factory;
     delete player;
+    delete caretaker;
     return 0;
 }
